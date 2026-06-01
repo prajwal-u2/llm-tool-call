@@ -54,5 +54,8 @@ while True:
     print("\n\nTool result:", result)
 
     messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
+    print("\n\n\Tools:", messages)
+
 
 print("\n\nFinal answer:", messages[-1].content)
+print()
