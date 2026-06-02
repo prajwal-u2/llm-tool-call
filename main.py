@@ -13,6 +13,8 @@ client = OpenAI(
 def get_weather(location: str) -> str:
     return json.dumps({"location": location, "temperature": "24 C"})
 
+available_functions = {"get_weather": get_weather}
+
 tools = [
     {
         "type": "function",
@@ -50,7 +52,7 @@ while True:
     args = json.loads(tc.function.arguments)
     print("\n\nTool call:", tc.function.name, args)
 
-    result = get_weather(**args)
+    result = available_functions[tc.function.name](**args)
     print("\n\nTool result:", result)
 
     messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
